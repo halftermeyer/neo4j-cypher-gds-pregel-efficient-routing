@@ -78,3 +78,9 @@ batfish-sidecar/      optional minimal HTTP wrapper around pybatfish
 ```
 
 Synthetic data only; times depend on your hardware.
+
+## Demo video
+
+<!-- demo-video:start -->
+[![Demo video (YouTube, unlisted)](docs/demo-thumb.png)](https://youtu.be/KF1ai3VBvSU)
+<!-- demo-video:end -->

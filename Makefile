@@ -21,3 +21,7 @@ video/audio/durations.json: $(SCRIPT)
 	python3 $(TOOLS)/tts.py --script $(SCRIPT)
 
 .PHONY: video video-silent
+
+video-publish:                             ## OPTIONAL: upload dist/demo.mp4 to YouTube as UNLISTED, link it from the README
+	python3 $(TOOLS)/youtube_upload.py --script $(SCRIPT)
+.PHONY: video-publish
