@@ -1,0 +1,20 @@
+# Multi-stage build of the custom GDS Pregel procedure.
+# Stage 1 borrows the GDS jar and Neo4j libs from the very image we will run, so the procedure is compiled against the right API.
+ARG NEO4J_VERSION=2026.10.2
+FROM neo4j:${NEO4J_VERSION}-enterprise AS neo4j
+
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /build
+COPY --from=neo4j /var/lib/neo4j/products/ /neo4j/products/
+COPY --from=neo4j /var/lib/neo4j/lib/ /neo4j/lib/
+COPY pregel/src ./src
+# -proc:none: GDS bundles annotation processors we do not want to run. --release 21 is accepted by the Java 21+ runtime of the image.
+RUN mkdir classes \
+ && GDS=$(ls /neo4j/products/neo4j-graph-data-science-*.jar | head -1) \
+ && javac -proc:none --release 21 -cp "$GDS:/neo4j/lib/*" -d classes $(find src -name '*.java') \
+ && jar cf netdt-bgp-pregel.jar -C classes .
+
+# Tiny final stage: its only job is to copy the jar into the ./plugins bind mount.
+FROM busybox:stable AS export
+COPY --from=build /build/netdt-bgp-pregel.jar /out/netdt-bgp-pregel.jar
+CMD ["sh", "-c", "cp /out/netdt-bgp-pregel.jar /plugins/ && echo 'Pregel jar copied to ./plugins'"]
