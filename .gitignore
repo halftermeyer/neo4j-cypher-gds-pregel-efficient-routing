@@ -7,3 +7,9 @@ plugins/*.jar
 *.license
 .DS_Store
 .claude/
+video/raw/
+video/audio/
+video/cues/
+video/*.json
+video/*.png
+video/.yt/

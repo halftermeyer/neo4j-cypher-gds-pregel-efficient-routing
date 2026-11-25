@@ -49,7 +49,7 @@ type Kind = "acl" | "kpaths" | "prune" | "fresh" | "vrf" | "bgp" | "batfish";
 /** Open every scenario with the business problem, stated visually, before anything runs. */
 export function Problem({ kind, title, objection, children }: { kind: Kind; title: string; objection: string; children: ReactNode }) {
   return (
-    <div className="problem">
+    <div className="problem" data-testid="problem">
       <div className="problem-text">
         <div className="problem-tag">The objection</div>
         <h2>{title}</h2>

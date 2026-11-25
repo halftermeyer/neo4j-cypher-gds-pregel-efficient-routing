@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test:equiv": "tsx scripts/headless.ts"
+    "test:equiv": "tsx scripts/headless.ts",
+    "reset": "tsx scripts/reset.ts"
   },
   "dependencies": {
     "@neo4j-ndl/react": "^4.16.4",

@@ -50,7 +50,7 @@ export default function Setup() {
 
   return (
     <div>
-      <div className="problem">
+      <div className="problem" data-testid="problem">
         <div className="problem-text">
           <div className="problem-tag">The story</div>
           <h2>“Neo4j can't do policy-aware K-paths or BGP convergence.”</h2>
@@ -96,7 +96,7 @@ export default function Setup() {
       </div>
 
       {st && (
-        <div className="card">
+        <div className="card" data-testid="db-stats">
           <h3>What is in the database now</h3>
           <div className="kpis">
             <Stat label="devices" value={st.devices} /><Stat label="interface nodes (in/out)" value={st.ifaces} />
